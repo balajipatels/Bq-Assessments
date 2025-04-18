@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+}
+body {
+  margin: 0;
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  background: linear-gradient(to bottom right, #e0f2ff, #f5eaff);
+}
+::ng-deep .mat-tab-group {
+  width: 100%;
+  overflow-x: auto;
+}
+
+::ng-deep .mat-tab-header {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+::ng-deep .mat-tab-header::-webkit-scrollbar {
+  display: none;
+}
+
+::ng-deep .mat-tab-labels {
+  display: flex;
+  flex-wrap: nowrap;
+  min-width: max-content;
+}
+@media (max-width: 768px) {
+  ::ng-deep .mat-tab-header {
+    justify-content: flex-start;
+  }
+
+  ::ng-deep .mat-tab-labels {
+    min-width: 100%;
+  }
+
+  ::ng-deep .mat-tab-label {
+    min-width: max-content;
+    margin-right: 8px;
+  }
+}
