@@ -1,0 +1,159 @@
+<app-header></app-header>
+
+<div class="dashboard-header-card">
+  <div class="hospital-info">
+    <div class="hospital-id">Hospital ID: EPTHM20</div>
+    <div class="hospital-name">BQ Healthcare <strong>(DEMO)</strong></div>
+    <div class="location-details">
+      COUNTRY: India &nbsp;&nbsp;|&nbsp;&nbsp; CITY: Delhi &nbsp;&nbsp;|&nbsp;&nbsp; PINCODE: 110001
+    </div>
+  </div>
+
+  <div class="ranking">
+    <div class="ranking-circle">#1</div>
+    <div class="ranking-label">RANKING</div>
+  </div>
+
+  <div class="status-cards">
+    <div class="status-card enrolled">
+      <div class="count">26</div>
+      <div class="label">ENROLLED</div>
+    </div>
+    <div class="status-card active">
+      <div class="count">25</div>
+      <div class="label">ACTIVE</div>
+    </div>
+    <div class="status-card inactive">
+      <div class="count">0</div>
+      <div class="label">INACTIVE</div>
+    </div>
+    <div class="status-card archived">
+      <div class="count">1</div>
+      <div class="label">ARCHIVED</div>
+    </div>
+  </div>
+</div>
+<div class="functions-wrapper p-2">
+  <div class="d-flex align-items-center mb-3 flex-wrap">
+    <strong class="me-2">FUNCTIONS</strong>
+    <span class="text-muted">(14)</span>
+  </div>
+
+  <div class="functions-scroll d-flex overflow-auto">
+    <div *ngFor="let func of functions" class="function-item px-3 py-2 me-2 mb-2"
+      [ngClass]="{ selected: func === selectedFunction }" (click)="selectFunction(func)">
+      {{ func }}
+    </div>
+  </div>
+</div>
+<div class="dashboard-grid">
+  <mat-card class="card policy-chart-card details-card">
+    <div class="card-content">
+      <mat-icon fontIcon="bed" class="bed-icon" aria-hidden="false" aria-label="Bed icon"></mat-icon>
+      <div class="bed-info">
+        <h6 class="bed-count">200 Beds</h6>
+        <h6 class="bed-label">Total Hospital Beds</h6>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="card policy-chart-card details-card">
+    <div class="card-content">
+      <mat-icon fontIcon="person" class="bed-icon" aria-hidden="false" aria-label="person icon"></mat-icon>
+      <div class="bed-info">
+        <h6 class="bed-count">84 Doctor</h6>
+        <h6 class="bed-label">24/7 Available</h6>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="card policy-chart-card details-card">
+    <div class="card-content">
+      <mat-icon fontIcon="local_pharmacy" class="bed-icon" aria-hidden="false" aria-label="person icon"></mat-icon>
+      <div class="bed-info">
+        <h6 class="bed-count">4242 Bills</h6>
+        <h6 class="bed-label">Pharmacy Medics</h6>
+      </div>
+    </div>
+  </mat-card>
+  <mat-card class="card policy-chart-card details-card">
+    <div class="card-content">
+      <mat-icon fontIcon="local_taxi" class="bed-icon" aria-hidden="false" aria-label="ambulance icon"></mat-icon>
+      <div class="bed-info">
+        <h6 class="bed-count">50 Ambulance</h6>
+        <h6 class="bed-label">24/7 Available</h6>
+      </div>
+    </div>
+  </mat-card>
+</div>
+<!-- dashboard.component.html -->
+<div class="dashboard-grid">
+  <!-- Hospital Staff Section -->
+  <mat-card class="card staff-card">
+    <div class="staff-heading">
+      <mat-icon fontIcon="groups" class="groups-icon" aria-hidden="false" aria-label="groups icon"></mat-icon>
+      <h2>HOSPITAL STAFF(S)</h2>
+    </div>
+    <div class="staff-content">
+      <div class="left-section">
+        <div class="staff-label">Concurrent Staff(s)</div>
+        <div class="staff-number">{{ concurrentStaff }}</div>
+      </div>
+      <div class="right-section">
+        <div class="enrolled-label">Enrolled Staff(s)</div>
+        <div class="enrolled-number">{{ enrolledStaff }}</div>
+      </div>
+    </div>
+  </mat-card>
+
+  <!-- Knowledge Level Section -->
+  <mat-card class="card knowledge-card">
+    <h2>KNOWLEDGE LEVEL</h2>
+    <div class="knowledge-content">
+      <div class="knowledge-level">{{ knowledgeLevel }}</div>
+      <div class="knowledge-score">{{ knowledgeScore }}</div>
+      <div class="score-label">SCORE</div>
+      <div class="knowledge-note">SUPONDS TO INTENSIFICATE LEVEL</div>
+    </div>
+  </mat-card>
+  <mat-card class="card policy-chart-card">
+    <canvas baseChart [data]="chartData" [type]="'doughnut'" [options]="chartOptions" [plugins]="chartPlugins">
+    </canvas>
+    <div class="label-section">
+      <div class="label-text">HOSPITAL POLICY AWARENESS</div>
+    </div>
+  </mat-card>
+
+  <mat-card class="card policy-chart-card">
+    <div class="card-title">STRESSOMETER LEVEL</div>
+    <canvas baseChart [labels]="doughnutChartLabels" [datasets]="doughnutChartDatasets" [type]="'doughnut'"
+      [options]="doughnutChartOptions">
+    </canvas>
+    <div class="label-section">
+      <div class="label-text">STRESSOMETER LEVEL</div>
+    </div>
+  </mat-card>
+</div>
+<div class="dashboard-grid">
+  <mat-card class="card visit-chart-card">
+    <h3>Hospital Visits Statistics</h3>
+    <canvas baseChart [data]="lineChartData" [options]="lineChartOptions" [type]="lineChartType" [legend]="true">
+    </canvas>
+  </mat-card>
+  <mat-card class="card operation-success-card">
+    <h4>Operation Success Rate</h4>
+    <canvas baseChart [data]="barChartData" [options]="barChartOptions" [type]="barChartType" [legend]="true">
+    </canvas>
+  </mat-card>
+  <!-- Strength vs Weakness -->
+  <mat-card class="card chart-card">
+    <h4>STRENGTH VS WEAKNESS</h4>
+    <canvas baseChart [data]="strengthWeaknessChartData" [options]="strengthWeaknessChartOptions" [type]="'bar'">
+    </canvas>
+  </mat-card>
+
+  <!-- Complete Tendency -->
+  <mat-card class="card chart-card">
+    <h4>COMPLETE TENDENCY</h4>
+    <canvas baseChart [data]="completeTendencyChartData" [options]="completeTendencyChartOptions" [type]="'line'">
+    </canvas>
+  </mat-card>
+</div>

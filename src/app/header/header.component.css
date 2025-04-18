@@ -1,0 +1,24 @@
+.logo {
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+.nav-tabs {
+  flex-grow: 1;
+}
+
+mat-tab-group {
+  border: none;
+}
+@media (max-width: 768px) {
+  ::ng-deep .mat-tab-labels {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  ::ng-deep .mat-tab-label {
+    padding: 8px 16px !important;
+    text-align: left;
+    width: 100%;
+  }
+}
